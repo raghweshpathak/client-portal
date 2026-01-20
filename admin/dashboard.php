@@ -1,10 +1,21 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+// Not logged in
+if (!isset($_SESSION['user'])) {
     header('Location: ../auth/login.php');
     exit;
 }
+
+// Role check
+if ($_SESSION['user']['role'] !== 'admin') {
+    header('Location: ../auth/login.php');
+    exit;
+}
+
+$email = $_SESSION['user']['email'];
+?>
+
 ?>
 <!DOCTYPE html>
 <html>
