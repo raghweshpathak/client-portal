@@ -1,5 +1,9 @@
 <?php
 session_start();
+// Prevent browser caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 // Not logged in
 if (!isset($_SESSION['user'])) {
@@ -28,10 +32,8 @@ $email = $_SESSION['user']['email'];
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-dark bg-dark px-3">
-    <span class="navbar-brand">RKTEN Admin Panel</span>
-    <a href="../auth/logout.php" class="btn btn-sm btn-outline-light">Logout</a>
-</nav>
+<?php include '../partials/admin_header.php'; ?>
+
 
 <div class="container mt-4">
     <h3 class="mb-4">Welcome Admin</h3>
