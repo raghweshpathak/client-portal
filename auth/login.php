@@ -1,3 +1,40 @@
+<?php
+session_start();
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    $users = [
+        'client@email.com' => [
+            'password' => 'client123',
+            'role' => 'client'
+        ],
+        'admin@email.com' => [
+            'password' => 'admin123',
+            'role' => 'admin'
+        ],
+    ];
+
+    if (isset($users[$email]) && $users[$email]['password'] === $password) {
+        $_SESSION['user'] = [
+            'email' => $email,
+            'role'  => $users[$email]['role']
+        ];
+
+        if ($users[$email]['role'] === 'admin') {
+            header('Location: ../admin/dashboard.php');
+        } else {
+            header('Location: ../client/dashboard.php');
+        }
+        exit;
+    } else {
+        $error = 'Invalid email or password';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,19 +59,25 @@
 
                         <h4 class="text-center mb-4">RKTEN Client Portal</h4>
 
-                        <form>
+                        <form method="POST" action="">
+
                             <div class="mb-3">
                                 <label class="form-label">Email address</label>
-                                <input type="email" class="form-control" placeholder="client@email.com">
+                                <input  type="email"name="email"class="form-control"placeholder="client@email.com"required
+>
+
+
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" placeholder="********">
+                                <input type="password" name="password" class="form-control" required>
+
                             </div>
 
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+
                                     Login
                                 </button>
                             </div>
