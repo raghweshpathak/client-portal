@@ -21,13 +21,50 @@ $email = $_SESSION['user']['email'];
 <head>
     <meta charset="UTF-8">
     <title>Client Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-    <h1>Welcome Client</h1>
-    <p>Email: <?php echo htmlspecialchars($email); ?></p>
+<nav class="navbar navbar-dark bg-primary px-3">
+    <span class="navbar-brand">RKTEN Client Panel</span>
+    <a href="../auth/logout.php" class="btn btn-sm btn-outline-light">Logout</a>
+</nav>
 
-    <a href="../auth/logout.php">Logout</a>
+<div class="container mt-4">
+    <h3 class="mb-1">Welcome</h3>
+    <p class="text-muted">Email: <?php echo htmlspecialchars($email); ?></p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6>My Projects</h6>
+                    <h2>2</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6>Pending Invoices</h6>
+                    <h2>1</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h6>Support Tickets</h6>
+                    <h2>0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
